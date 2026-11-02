@@ -1,26 +1,12 @@
 import { useEffect } from "react";
 import "@/App.css";
 
-const DEFAULT_TARGET = "https://studiowonderland.eu/degrotesinterklaasshow";
-
-// Map URL path -> redirect target. Query params are stripped by design.
-const ROUTES = {
-  "/": DEFAULT_TARGET,
-  "/sinterklaasshow": DEFAULT_TARGET,
-  "/degrotesinterklaasshow": DEFAULT_TARGET,
-  "/kerstman": "https://studiowonderland.eu/hethuisvandekerstman",
-  "/hethuisvandekerstman": "https://studiowonderland.eu/hethuisvandekerstman",
-};
-
-function resolveTarget() {
-  const path = window.location.pathname.replace(/\/+$/, "") || "/";
-  return ROUTES[path] || DEFAULT_TARGET;
-}
+const TARGET_URL = "https://studiowonderland.eu/hethuisvandekerstman";
 
 function App() {
   useEffect(() => {
-    // Immediate, history-replacing redirect (no back-button trap).
-    window.location.replace(resolveTarget());
+    // Immediate, history-replacing redirect. Query params are stripped by design.
+    window.location.replace(TARGET_URL);
   }, []);
 
   return (
@@ -33,7 +19,7 @@ function App() {
       }}
     >
       <noscript>
-        <a data-testid="redirect-fallback-link" href={resolveTarget()}>
+        <a data-testid="redirect-fallback-link" href={TARGET_URL}>
           Continue
         </a>
       </noscript>
